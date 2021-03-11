@@ -8,6 +8,9 @@ require('dotenv').config({path: '.env'})
 const app = express();
 app.use(express.json());
 
+// graphql
+const graphql = require('./graphql/graphql');
+graphql.applyMiddleware({ app });
 
 if(process.env.NODE_ENV && ['production','ci'].includes(process.env.NODE_ENV)) {
     // SET THE STATIC FOLDER TO frontend/build
@@ -18,7 +21,7 @@ if(process.env.NODE_ENV && ['production','ci'].includes(process.env.NODE_ENV)) {
     });
 } else {
     app.get('/', (req, res) => {
-        res.send('Hello From API /');
+        res.send('Hello From API');
     });
 }
 

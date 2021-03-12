@@ -1,9 +1,11 @@
+// .env file
+require('dotenv').config({path: '.env'})
+
 const express = require('express');
+require('./db/db');
 const path = require('path');
 const keys = require('./keys/keys');
 
-// .env file
-require('dotenv').config({path: '.env'})
 
 const app = express();
 app.use(express.json());

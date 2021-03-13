@@ -5,10 +5,14 @@ const express = require('express');
 require('./db/db');
 const path = require('path');
 const keys = require('./keys/keys');
+const cors = require('cors');
 
 
 const app = express();
 app.use(express.json());
+app.use(cors({
+    origin: 'http://localhost:3000'
+}));
 
 // graphql
 const graphql = require('./graphql/graphql');
@@ -27,9 +31,7 @@ if(process.env.NODE_ENV && ['production','ci'].includes(process.env.NODE_ENV)) {
     });
 }
 
-app.get('/api', (req, res) => {
-    res.send('Hello From API /api');
-});
+app.use('/api',require('./routes/index'));
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

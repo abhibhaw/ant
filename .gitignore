@@ -1,6 +1,14 @@
 node_modules
 .env
+install_docker.sh
+dev.sh
+dockerfile.dev
+docker-compose.dev.yml
 
 frontend/node_modules
 frontend/build
 frontend/README.md
+frontend/dockerfile.dev
+
+
+

@@ -7,7 +7,6 @@ const Dashboard = lazy(() => import('./components/dashboard/Dashboard'));
 
 const Buttons = lazy(() => import('./components/basic-ui/Buttons'));
 
-const Dropdowns = lazy(() => import('./components/basic-ui/Dropdowns'));
 
 const BasicElements = lazy(() => import('./components/form-elements/BasicElements'));
 
@@ -23,6 +22,7 @@ const Error500 = lazy(() => import('./components/error-pages/Error500'));
 const Login = lazy(() => import('./components/user-pages/Login'));
 const Register1 = lazy(() => import('./components/user-pages/Register'));
 
+const Hub = lazy(() => import('./components/Hub/Hub'));
 
 class AppRoutes extends Component {
   render () {
@@ -30,9 +30,10 @@ class AppRoutes extends Component {
       <Suspense fallback={<Spinner/>}>
         <Switch>
           <Route exact path="/dashboard" component={ Dashboard } />
+          
+          <Route exact path="/hub" component={ Hub } />
 
           <Route path="/basic-ui/buttons" component={ Buttons } />
-          <Route path="/basic-ui/dropdowns" component={ Dropdowns } />
 
           <Route path="/form-Elements/basic-elements" component={ BasicElements } />
 

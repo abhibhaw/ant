@@ -1,5 +1,5 @@
-import './App.css';
 import './App.scss';
+import './App.css';
 import {  
   useQuery,
   gql
@@ -73,8 +73,8 @@ function App(props) {
   return (
       <div className="container-scroller">
         { !state.isFullPageLayout ? <Navbar/> : '' }
-        <div className="container-fluid page-body-wrapper">
-          { !state.isFullPageLayout ? <Sidebar/> : '' }
+        <div className="container-fluid page-body-wrapper" >
+          { !state.isFullPageLayout ? <Sidebar /> : '' }
           <div className="main-panel">
             <div className="content-wrapper">
               <AppRoutes/>

@@ -24,7 +24,7 @@ import {
 import NavItem from './NavItem';
 
 const user = {
-  avatar: '/static/images/avatars/avatar_5.png',
+  avatar: '/static/images/avatars/xori.jpg',
   jobTitle: 'CTO GEPTON',
   name: 'Abhibhaw Asthana'
 };

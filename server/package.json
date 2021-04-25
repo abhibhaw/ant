@@ -1,0 +1,14 @@
+{
+  "name": "ant-server",
+  "version": "1.0.0",
+  "description": "Backend of Project Ant",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Abhibhaw Asthana",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}

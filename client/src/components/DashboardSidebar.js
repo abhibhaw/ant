@@ -24,9 +24,9 @@ import {
 import NavItem from './NavItem';
 
 const user = {
-  avatar: '/static/images/avatars/avatar_6.png',
-  jobTitle: 'Senior Developer',
-  name: 'Katarina Smith'
+  avatar: '/static/images/avatars/avatar_5.png',
+  jobTitle: 'CTO GEPTON',
+  name: 'Abhibhaw Asthana'
 };
 
 const items = [
@@ -146,13 +146,13 @@ const DashboardSidebar = ({ onMobileClose, openMobile }) => {
           gutterBottom
           variant="h4"
         >
-          Need more?
+          MILKTON
         </Typography>
         <Typography
           align="center"
           variant="body2"
         >
-          Upgrade to PRO version and access 20 more screens
+          v2.0.0 Shree Surbhi Milk ERP.
         </Typography>
         <Box
           sx={{
@@ -164,10 +164,11 @@ const DashboardSidebar = ({ onMobileClose, openMobile }) => {
           <Button
             color="primary"
             component="a"
-            href="https://react-material-kit.devias.io"
+            href="https://gepton.com"
             variant="contained"
+            target="_blank"
           >
-            See PRO version
+            BY GEPTON
           </Button>
         </Box>
       </Box>

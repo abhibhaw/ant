@@ -12,14 +12,15 @@ import {
   Typography
 } from '@material-ui/core';
 import {
-  AlertCircle as AlertCircleIcon,
   BarChart as BarChartIcon,
-  Lock as LockIcon,
   Settings as SettingsIcon,
   ShoppingBag as ShoppingBagIcon,
   User as UserIcon,
   UserPlus as UserPlusIcon,
-  Users as UsersIcon
+  Users as UsersIcon,
+  MapPin as LocationIcon,
+  Send as BillingIcon,
+  TrendingUp as ReportsIcon
 } from 'react-feather';
 import NavItem from './NavItem';
 
@@ -47,8 +48,23 @@ const items = [
   },
   {
     href: '/app/account',
+    icon: LocationIcon,
+    title: 'Location'
+  },
+  {
+    href: '/app/account',
     icon: UserIcon,
-    title: 'Account'
+    title: 'Executives'
+  },
+  {
+    href: '/app/account',
+    icon: ReportsIcon,
+    title: 'Reports'
+  },
+  {
+    href: '/app/account',
+    icon: BillingIcon,
+    title: 'Billing'
   },
   {
     href: '/app/settings',
@@ -56,19 +72,9 @@ const items = [
     title: 'Settings'
   },
   {
-    href: '/login',
-    icon: LockIcon,
-    title: 'Login'
-  },
-  {
-    href: '/register',
+    href: '/app/register',
     icon: UserPlusIcon,
-    title: 'Register'
-  },
-  {
-    href: '/404',
-    icon: AlertCircleIcon,
-    title: 'Error'
+    title: 'Add Admin'
   }
 ];
 
@@ -107,16 +113,10 @@ const DashboardSidebar = ({ onMobileClose, openMobile }) => {
           }}
           to="/app/account"
         />
-        <Typography
-          color="textPrimary"
-          variant="h5"
-        >
+        <Typography color="textPrimary" variant="h5">
           {user.name}
         </Typography>
-        <Typography
-          color="textSecondary"
-          variant="body2"
-        >
+        <Typography color="textSecondary" variant="body2">
           {user.jobTitle}
         </Typography>
       </Box>
@@ -141,17 +141,10 @@ const DashboardSidebar = ({ onMobileClose, openMobile }) => {
           p: 2
         }}
       >
-        <Typography
-          align="center"
-          gutterBottom
-          variant="h4"
-        >
+        <Typography align="center" gutterBottom variant="h4">
           MILKTON
         </Typography>
-        <Typography
-          align="center"
-          variant="body2"
-        >
+        <Typography align="center" variant="body2">
           v2.0.0 Shree Surbhi Milk ERP.
         </Typography>
         <Box
@@ -218,7 +211,7 @@ DashboardSidebar.propTypes = {
 };
 
 DashboardSidebar.defaultProps = {
-  onMobileClose: () => { },
+  onMobileClose: () => {},
   openMobile: false
 };
 

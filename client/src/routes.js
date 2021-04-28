@@ -4,7 +4,6 @@ import MainLayout from './components/MainLayout';
 import Account from './pages/Account';
 import CustomerList from './pages/CustomerList';
 import Dashboard from './pages/Dashboard';
-import Login from './pages/Login';
 import NotFound from './pages/NotFound';
 import ProductList from './pages/ProductList';
 import Register from './pages/Register';
@@ -28,7 +27,7 @@ const routes = [
     path: '/',
     element: <MainLayout />,
     children: [
-      { path: 'login', element: <Login /> },
+      { path: 'login', element: <Navigate to="/app/dashboard" /> },
       { path: '404', element: <NotFound /> },
       { path: '/', element: <Navigate to="/app/dashboard" /> },
       { path: '*', element: <Navigate to="/404" /> }

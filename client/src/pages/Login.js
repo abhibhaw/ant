@@ -40,15 +40,15 @@ const Login = () => {
               password: Yup.string().max(255).required('Password is required')
             })}
             onSubmit={(values) => {
-              console.log(values);
               axios({
                 method: 'post',
                 data: values,
-                withCreadentials: true,
+                withCredentials: true,
                 url: 'http://localhost:4000/login'
               }).then((res) => {
-                navigate('/app/dashboard', { replace: true });
-                console.log(res);
+                if (res.data != null) {
+                  navigate('/app/dashboard', { replace: true });
+                }
               });
             }}
           >
@@ -63,7 +63,10 @@ const Login = () => {
             }) => (
               <form onSubmit={handleSubmit}>
                 <Box alignItems="center" display="flex" flexDirection="column">
-                  <img alt="Gepton Logo" src="./static//images/gepton.png" />
+                  <img
+                    alt="Gepton Logo"
+                    src="https://github.com/GEPTON-INFOTECH/GEPTON-INFOTECH/raw/main/branding/gepton%20-128px.png"
+                  />
                 </Box>
                 <Box
                   sx={{ mb: 3, mt: 1 }}

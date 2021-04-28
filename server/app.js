@@ -27,6 +27,9 @@ app.use(
     secret: process.env.ENCRYPTION_SECRET,
     resave: true,
     saveUninitialized: true,
+    cookie: {
+      maxAge: 30 * 24 * 60 * 60 * 1000,
+    },
   })
 );
 app.use(cookieParser(process.env.ENCRYPTION_SECRET));
@@ -55,7 +58,6 @@ app.post("/login", function (req, res, next) {
       req.logIn(user, (err) => {
         if (err) throw err;
         res.send("Successfully Authenticated");
-        console.log("req.user");
       });
     }
   })(req, res, next);

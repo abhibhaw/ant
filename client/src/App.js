@@ -5,8 +5,9 @@ import './mixins/chartjs';
 import theme from './theme';
 import routes from './routes';
 import GlobalStyles from './components/GlobalStyles';
-
-const isLoggedIn = true;
+import User from './context/userContext';
+// eslint-disable-next-line object-curly-newline
+import { isLoggedIn, username, firstName, lastName } from './services/auth';
 
 const App = () => {
   const routing = useRoutes(routes(isLoggedIn));
@@ -14,7 +15,9 @@ const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles />
-      {routing}
+      <User.Provider value={{ username, firstName, lastName }}>
+        {routing}
+      </User.Provider>
     </ThemeProvider>
   );
 };

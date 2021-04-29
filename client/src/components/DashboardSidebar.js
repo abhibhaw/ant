@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useContext } from 'react';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {
@@ -23,11 +23,10 @@ import {
   TrendingUp as ReportsIcon
 } from 'react-feather';
 import NavItem from './NavItem';
+import User from '../context/userContext';
 
 const user = {
-  avatar: '/static/images/avatars/xori.jpg',
-  jobTitle: 'CTO GEPTON',
-  name: 'Abhibhaw Asthana'
+  avatar: '/static/images/avatars/xori.jpg'
 };
 
 const items = [
@@ -80,6 +79,7 @@ const items = [
 
 const DashboardSidebar = ({ onMobileClose, openMobile }) => {
   const location = useLocation();
+  const { username, firstName, lastName } = useContext(User);
 
   useEffect(() => {
     if (openMobile && onMobileClose) {
@@ -114,10 +114,10 @@ const DashboardSidebar = ({ onMobileClose, openMobile }) => {
           to="/app/account"
         />
         <Typography color="textPrimary" variant="h5">
-          {user.name}
+          {`${firstName} ${lastName}`}
         </Typography>
         <Typography color="textSecondary" variant="body2">
-          {user.jobTitle}
+          {username}
         </Typography>
       </Box>
       <Divider />

@@ -1,24 +1,26 @@
-import { useEffect, useState } from 'react';
+/* eslint-disable import/no-mutable-exports */
 import axios from 'axios';
 
-const Auth = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+let isLoggedIn = false;
+let username = '';
+let firstName = '';
+let lastName = '';
 
-  useEffect(() => {
-    const fetchUser = () => {
-      axios({
-        method: 'get',
-        withCredentials: true,
-        url: 'http://localhost:4000/user'
-      }).then((response) => {
-        if (response.data) {
-          setIsLoggedIn(true);
-        }
-      });
-    };
-
-    fetchUser();
-  }, [isLoggedIn, setIsLoggedIn]);
+const fetchUser = () => {
+  axios({
+    method: 'get',
+    withCredentials: true,
+    url: 'http://localhost:4000/user'
+  }).then((response) => {
+    if (response.data) {
+      isLoggedIn = true;
+      username = response.data.username;
+      firstName = response.data.firstName;
+      lastName = response.data.lastName;
+    }
+  });
 };
+fetchUser();
 
-export default Auth;
+// eslint-disable-next-line object-curly-newline
+export { isLoggedIn, username, firstName, lastName };

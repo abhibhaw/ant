@@ -1,7 +1,7 @@
 {
   "name": "ant-client",
   "author": "Abhibhaw Asthana",
-  "licence": "ISC",
+  "license": "ISC",
   "version": "1.0.0",
   "private": false,
   "scripts": {

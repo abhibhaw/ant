@@ -8,11 +8,12 @@ import NotFound from './pages/NotFound';
 import ProductList from './pages/ProductList';
 import Register from './pages/Register';
 import Settings from './pages/Settings';
+import Login from './pages/Login';
 
-const routes = [
+const routes = (isLoggedIn) => [
   {
     path: 'app',
-    element: <DashboardLayout />,
+    element: isLoggedIn ? <DashboardLayout /> : <Navigate to="/login" />,
     children: [
       { path: 'account', element: <Account /> },
       { path: 'customers', element: <CustomerList /> },
@@ -20,17 +21,17 @@ const routes = [
       { path: 'products', element: <ProductList /> },
       { path: 'settings', element: <Settings /> },
       { path: 'register', element: <Register /> },
-      { path: '*', element: <Navigate to="/404" /> }
+      { path: '404', element: <NotFound /> },
+      { path: '*', element: <Navigate to="/app/404" /> }
     ]
   },
   {
     path: '/',
-    element: <MainLayout />,
+    element: !isLoggedIn ? <MainLayout /> : <Navigate to="/app/dashboard" />,
     children: [
-      { path: 'login', element: <Navigate to="/app/dashboard" /> },
-      { path: '404', element: <NotFound /> },
-      { path: '/', element: <Navigate to="/app/dashboard" /> },
-      { path: '*', element: <Navigate to="/404" /> }
+      { path: 'login', element: <Login /> },
+      { path: '/', element: <Navigate to="/login" /> },
+      { path: '*', element: <Navigate to="/login" /> }
     ]
   }
 ];

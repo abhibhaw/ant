@@ -4,6 +4,8 @@
   "description": "Backend of Project Ant",
   "main": "app.js",
   "scripts": {
+    "start": "nodemon app",
+    "dev": "NODE_ENV=production node app",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Abhibhaw Asthana",

@@ -7,7 +7,9 @@ import routes from './routes';
 import GlobalStyles from './components/GlobalStyles';
 import User from './context/userContext';
 // eslint-disable-next-line object-curly-newline
-import { isLoggedIn, username, firstName, lastName } from './services/auth';
+import { username, firstName, lastName } from './services/auth';
+
+const isLoggedIn = true;
 
 const App = () => {
   const routing = useRoutes(routes(isLoggedIn));

@@ -46,12 +46,12 @@ const items = [
     title: 'Products'
   },
   {
-    href: '/app/account',
+    href: '/app/location',
     icon: LocationIcon,
     title: 'Location'
   },
   {
-    href: '/app/account',
+    href: '/app/executive',
     icon: UserIcon,
     title: 'Executives'
   },

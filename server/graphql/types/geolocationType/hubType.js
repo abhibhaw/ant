@@ -1,5 +1,5 @@
 const graphql = require("graphql");
-const { GraphQLObjectType, GraphQLID, GraphQLString, GraphQLInt } = graphql;
+const { GraphQLObjectType, GraphQLID, GraphQLString } = graphql;
 
 const HubType = new GraphQLObjectType({
   name: "Hub",
@@ -7,7 +7,8 @@ const HubType = new GraphQLObjectType({
     id: { type: GraphQLID },
     hubName: { type: GraphQLString },
     address: { type: GraphQLString },
-    mobileNo: { type: GraphQLInt },
+    mobileNo: { type: GraphQLString },
+    email: { type: GraphQLString },
   }),
 });
 

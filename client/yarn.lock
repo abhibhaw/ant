@@ -1561,6 +1561,15 @@
     react-is "^17.0.0"
     react-transition-group "^4.4.0"
 
+"@material-ui/data-grid@^4.0.0-alpha.27":
+  version "4.0.0-alpha.27"
+  resolved "https://registry.yarnpkg.com/@material-ui/data-grid/-/data-grid-4.0.0-alpha.27.tgz#8be77550e967700215f2ba3f95f0d528ee2241f7"
+  integrity sha512-nZFgtryrhU6c4Q8hl6KhcJMQ4gxYTpFybMyKWPBBJ6Izsgc5RbDrdB3zGy9MEOTbQP6e+RZT1bL/Es/efz9CRw==
+  dependencies:
+    "@material-ui/utils" "^5.0.0-alpha.14"
+    prop-types "^15.7.2"
+    reselect "^4.0.0"
+
 "@material-ui/icons@^5.0.0-alpha.28":
   version "5.0.0-alpha.29"
   resolved "https://registry.npmjs.org/@material-ui/icons/-/icons-5.0.0-alpha.29.tgz"
@@ -1652,7 +1661,7 @@
     prop-types "^15.7.2"
     react-is "^17.0.0"
 
-"@material-ui/utils@5.0.0-alpha.31":
+"@material-ui/utils@5.0.0-alpha.31", "@material-ui/utils@^5.0.0-alpha.14":
   version "5.0.0-alpha.31"
   resolved "https://registry.yarnpkg.com/@material-ui/utils/-/utils-5.0.0-alpha.31.tgz#a4ff785d4c643f9b25dd3bdf7cc1b8ef00adf954"
   integrity sha512-4OzVD12+HbfWMftwiHCBforgjkhzbWMdK9GTQLQcekjdG2qpi41BGvanPpHjlxegzou0A2MEaULBvWqsKrUP9A==
@@ -10849,6 +10858,11 @@ requires-port@^1.0.0:
   version "1.0.0"
   resolved "https://registry.npmjs.org/requires-port/-/requires-port-1.0.0.tgz"
   integrity sha1-kl0mAdOaxIXgkc8NpcbmlNw9yv8=
+
+reselect@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/reselect/-/reselect-4.0.0.tgz#f2529830e5d3d0e021408b246a206ef4ea4437f7"
+  integrity sha512-qUgANli03jjAyGlnbYVAV5vvnOmJnODyABz51RdBN7M4WaVu8mecZWgyQNkG8Yqe3KRGRt0l4K4B3XVEULC4CA==
 
 resolve-cwd@^2.0.0:
   version "2.0.0"

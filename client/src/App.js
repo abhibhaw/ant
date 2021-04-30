@@ -6,7 +6,6 @@ import theme from './theme';
 import routes from './routes';
 import GlobalStyles from './components/GlobalStyles';
 import User from './context/userContext';
-// eslint-disable-next-line object-curly-newline
 import { username, firstName, lastName } from './services/auth';
 
 const isLoggedIn = true;

@@ -7,6 +7,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import { TabPanel, a11yProps } from '../components/shared/TabPanel';
 import AddHub from '../components/location/AddHub';
+import DisplayHub from '../components/location/DisplayHub';
 
 const useStyles = makeStyles({
   root: {
@@ -42,6 +43,8 @@ const Location = () => {
       </Paper>
       <TabPanel value={value} index={0}>
         <AddHub />
+        <Box p={3} />
+        <DisplayHub />
       </TabPanel>
       <TabPanel value={value} index={1}>
         <Box

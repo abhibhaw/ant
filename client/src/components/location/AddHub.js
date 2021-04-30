@@ -65,7 +65,7 @@ const AddHub = (props) => {
   return (
     <form autoComplete="off" noValidate {...props} onSubmit={handleSubmit}>
       <Card>
-        <CardHeader subheader="All fields are Required." title="Add New Hub" />
+        <CardHeader subheader="All fields are required." title="Add New Hub" />
         <Divider />
         <CardContent>
           <Grid container spacing={3}>

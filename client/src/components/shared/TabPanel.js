@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { Box, Container } from '@material-ui/core';
+import { Box } from '@material-ui/core';
 
 function TabPanel(props) {
   // eslint-disable-next-line object-curly-newline
@@ -13,11 +13,7 @@ function TabPanel(props) {
       aria-labelledby={`simple-tab-${index}`}
       {...other}
     >
-      {value === index && (
-        <Box p={3}>
-          <Container>{children}</Container>
-        </Box>
-      )}
+      {value === index && <Box p={3}>{children}</Box>}
     </div>
   );
 }

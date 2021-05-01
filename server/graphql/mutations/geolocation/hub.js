@@ -1,5 +1,5 @@
 const graphql = require("graphql");
-const { GraphQLNonNull, GraphQLString, GraphQLInt } = graphql;
+const { GraphQLNonNull, GraphQLString, GraphQLID } = graphql;
 
 const HubType = require("../../types/geolocationType/hubType");
 const Hub = require("../../../models/geolocation/hub");
@@ -23,4 +23,14 @@ const addHub = {
   },
 };
 
-module.exports = { addHub };
+const deleteHub = {
+  type: HubType,
+  args: { id: { type: new GraphQLNonNull(GraphQLID) } },
+  resolve(parent, args) {
+    return Hub.deleteOne({ _id: args.id }, function (err, res) {
+      return "Success!";
+    });
+  },
+};
+
+module.exports = { addHub, deleteHub };

@@ -1,24 +1,43 @@
 import 'react-perfect-scrollbar/dist/css/styles.css';
+import { useState } from 'react';
 import { useRoutes } from 'react-router-dom';
 import { ThemeProvider } from '@material-ui/core';
-import './mixins/chartjs';
-import theme from './theme';
-import routes from './routes';
 import GlobalStyles from './components/GlobalStyles';
-import User from './context/userContext';
-import { username, firstName, lastName } from './services/auth';
-
-const isLoggedIn = true;
+import theme from './theme';
+import './mixins/chartjs';
+import UserContext from './context/userContext';
+import fetchUser from './services/auth';
+import routes from './routes';
 
 const App = () => {
-  const routing = useRoutes(routes(isLoggedIn));
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [username, setUsername] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [loading, setLoading] = useState(true);
+  const routing = useRoutes(routes(isLoggedIn, loading));
+
+  fetchUser(setIsLoggedIn, setLoading, setUsername, setFirstName, setLastName);
 
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles />
-      <User.Provider value={{ username, firstName, lastName }}>
+      <UserContext.Provider
+        value={{
+          isLoggedIn,
+          setIsLoggedIn,
+          loading,
+          setLoading,
+          username,
+          setUsername,
+          firstName,
+          setFirstName,
+          lastName,
+          setLastName
+        }}
+      >
         {routing}
-      </User.Provider>
+      </UserContext.Provider>
     </ThemeProvider>
   );
 };

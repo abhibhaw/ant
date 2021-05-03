@@ -23,7 +23,7 @@ import {
   TrendingUp as ReportsIcon
 } from 'react-feather';
 import NavItem from './NavItem';
-import User from '../context/userContext';
+import UserContext from '../context/userContext';
 
 const user = {
   avatar: '/static/images/avatars/xori.jpg'
@@ -79,7 +79,7 @@ const items = [
 
 const DashboardSidebar = ({ onMobileClose, openMobile }) => {
   const location = useLocation();
-  const { username, firstName, lastName } = useContext(User);
+  const { username, firstName, lastName } = useContext(UserContext);
 
   useEffect(() => {
     if (openMobile && onMobileClose) {

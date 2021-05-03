@@ -3,6 +3,7 @@ import { Card, CardHeader, Button } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import { gql, useQuery, useMutation } from '@apollo/client';
+import Loading from '../shared/Loading';
 
 const GET_HUBS = gql`
   {
@@ -20,6 +21,10 @@ const DELETE_HUB = gql`
   mutation DELETE_HUB($id: ID!) {
     deleteHub(id: $id) {
       id
+      hubName
+      mobileNo
+      email
+      address
     }
   }
 `;
@@ -27,8 +32,10 @@ const DELETE_HUB = gql`
 export default function DisplayHub() {
   const { loading, error, data } = useQuery(GET_HUBS);
   const [deleteHub, deletedHubData] = useMutation(DELETE_HUB);
-  if (loading) return 'Loading';
+  if (loading) return <Loading />;
   if (error) return 'Error!';
+  if (deletedHubData.loading) return <Loading />;
+  if (deletedHubData.error) return 'Error!';
 
   const columns = [
     { field: 'hubName', headerName: 'Hub Name', width: 250 },
@@ -84,7 +91,6 @@ export default function DisplayHub() {
             onClick={(e) => {
               e.stopPropagation();
               deleteHub({ variables: { id: params.id } });
-              console.log(deletedHubData.data);
               alert('Deleted!');
             }}
             startIcon={<DeleteIcon />}

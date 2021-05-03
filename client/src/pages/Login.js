@@ -1,5 +1,6 @@
 /* eslint-disable object-curly-newline */
 import { useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
 import { Helmet } from 'react-helmet';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
@@ -11,9 +12,11 @@ import {
   TextField,
   Typography
 } from '@material-ui/core';
+import UserContext from '../context/userContext';
 
 const Login = () => {
   const navigate = useNavigate();
+  const { setIsLoggedIn } = useContext(UserContext);
 
   return (
     <>
@@ -46,7 +49,9 @@ const Login = () => {
                 withCredentials: true,
                 url: 'http://localhost:4000/login'
               }).then((res) => {
-                if (res.data != null) {
+                console.log(res);
+                if (res.data === 'Successfully Authenticated') {
+                  setIsLoggedIn(true);
                   navigate('/app/dashboard', { replace: true });
                 }
               });

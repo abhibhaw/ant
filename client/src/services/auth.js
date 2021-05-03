@@ -1,26 +1,29 @@
-/* eslint-disable import/no-mutable-exports */
 import axios from 'axios';
 
-let isLoggedIn = false;
-let username = '';
-let firstName = '';
-let lastName = '';
-
-const fetchUser = () => {
+const fetchUser = (
+  setIsLoggedIn,
+  setLoading,
+  setUsername,
+  setFirstName,
+  setLastName
+) => {
   axios({
     method: 'get',
     withCredentials: true,
     url: 'http://localhost:4000/user'
-  }).then((response) => {
-    if (response.data) {
-      isLoggedIn = true;
-      username = response.data.username;
-      firstName = response.data.firstName;
-      lastName = response.data.lastName;
-    }
-  });
+  })
+    .then((response) => {
+      if (response.data) {
+        setIsLoggedIn(true);
+        setUsername(response.data.username);
+        setFirstName(response.data.firstName);
+        setLastName(response.data.lastName);
+      }
+      setLoading(false);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 };
-fetchUser();
 
-// eslint-disable-next-line object-curly-newline
-export { isLoggedIn, username, firstName, lastName };
+export default fetchUser;

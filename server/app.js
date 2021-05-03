@@ -6,7 +6,6 @@ const cookieParser = require("cookie-parser");
 const session = require("express-session");
 const schema = require("./graphql/schema");
 const passport = require("passport");
-const passportLocal = require("passport-local");
 const bcrypt = require("bcryptjs");
 const Admin = require("./models/admins/admin");
 
@@ -82,6 +81,11 @@ app.post("/register", function (req, res) {
 });
 
 app.get("/user", (req, res) => {
+  res.send(req.user);
+});
+
+app.get("/logout", function (req, res) {
+  req.logout();
   res.send(req.user);
 });
 // -------------------------------------END OF ROUTES-------------------------------------

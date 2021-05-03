@@ -10,6 +10,7 @@ import {
   Grid,
   TextField
 } from '@material-ui/core';
+import Loading from '../shared/Loading';
 
 const ADD_HUB = gql`
   mutation AddHub(
@@ -59,7 +60,7 @@ const AddHub = (props) => {
     }).then(console.log(data));
   };
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <Loading />;
   if (error) return <p>Error...</p>;
 
   return (

@@ -1,6 +1,7 @@
 import { Navigate } from 'react-router-dom';
 import DashboardLayout from './components/DashboardLayout';
 import MainLayout from './components/MainLayout';
+import Loading from './components/shared/Loading';
 import Login from './pages/Login';
 import Account from './pages/Account';
 import CustomerList from './pages/CustomerList';
@@ -12,10 +13,19 @@ import Settings from './pages/Settings';
 import Location from './pages/Location';
 import Executive from './pages/Executive';
 
-const routes = (isLoggedIn) => [
+const routes = (isLoggedIn, loading) => [
   {
     path: 'app',
-    element: isLoggedIn ? <DashboardLayout /> : <Navigate to="/login" />,
+    // eslint-disable-next-line no-nested-ternary
+    element: !loading ? (
+      isLoggedIn ? (
+        <DashboardLayout />
+      ) : (
+        <Navigate to="/login" />
+      )
+    ) : (
+      <Loading />
+    ),
     children: [
       { path: '/', element: <Navigate to="/app/dashboard" /> },
       { path: 'dashboard', element: <Dashboard /> },

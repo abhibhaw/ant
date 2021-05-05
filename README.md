@@ -7,14 +7,16 @@ Project Ant `More Details Here`
 Project developed and owned by [GEPTON](https://gepton.com)
 
 # Project Structure
-
-- Ant
-- Bat
-- Cat
-
+![Ant](https://user-images.githubusercontent.com/39991296/117089133-43c82800-ad72-11eb-8d4f-13f5c7f62ebf.png)
 # Installation Guide
 
-`Installation Docs goes here.`
+`cd client or server`
+<br>
+`yarn`
+<br>
+`yarn start`
+<br>
+`Default PORTS: Server-3000, Client-4000`
 
 # Contributing
 

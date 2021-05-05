@@ -108,8 +108,14 @@ const Register = () => {
               values
             }) => (
               <form onSubmit={handleSubmit}>
+                <Box alignItems="center" display="flex" flexDirection="column">
+                  <img
+                    alt="Gepton Logo"
+                    src="https://github.com/GEPTON-INFOTECH/GEPTON-INFOTECH/raw/main/branding/gepton%20-128px.png"
+                  />
+                </Box>
                 <Box
-                  sx={{ mb: 3 }}
+                  sx={{ mb: 3, mt: 1 }}
                   display="flex"
                   flexDirection="column"
                   alignItems="center"

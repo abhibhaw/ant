@@ -1,7 +1,7 @@
 const Logo = (props) => (
   <img
     alt="Logo"
-    src="/static/logo.png"
+    src="https://github.com/GEPTON-INFOTECH/GEPTON-INFOTECH/raw/main/branding/logo-139x52(blue-background).png"
     {...props}
   />
 );

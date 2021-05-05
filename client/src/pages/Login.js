@@ -1,6 +1,6 @@
 /* eslint-disable object-curly-newline */
 import { useNavigate } from 'react-router-dom';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
@@ -10,13 +10,53 @@ import {
   Button,
   Container,
   TextField,
-  Typography
+  Typography,
+  Snackbar,
+  IconButton,
+  Alert
 } from '@material-ui/core';
 import UserContext from '../context/userContext';
 
 const Login = () => {
   const navigate = useNavigate();
   const { setIsLoggedIn } = useContext(UserContext);
+
+  const [open, setOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState('');
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') return;
+
+    setOpen(false);
+  };
+  const snackbar = (
+    <Snackbar
+      anchorOrigin={{
+        vertical: 'top',
+        horizontal: 'right'
+      }}
+      open={open}
+      autoHideDuration={6000}
+      onClose={handleClose}
+      style={{ marginTop: 50, width: 500 }}
+      // message={snackbarMessage}
+      action={
+        // eslint-disable-next-line react/jsx-wrap-multilines
+        <IconButton
+          size="small"
+          aria-label="close"
+          color="inherit"
+          onClick={handleClose}
+        >
+          x
+        </IconButton>
+      }
+    >
+      <Alert severity="error" onClose={handleClose}>
+        {snackbarMessage}
+      </Alert>
+    </Snackbar>
+  );
 
   return (
     <>
@@ -53,6 +93,8 @@ const Login = () => {
                   setIsLoggedIn(true);
                   navigate('/app/dashboard', { replace: true });
                 }
+                setSnackbarMessage(res.data);
+                setOpen(true);
               });
             }}
           >
@@ -130,6 +172,7 @@ const Login = () => {
               </form>
             )}
           </Formik>
+          {snackbar}
         </Container>
       </Box>
     </>

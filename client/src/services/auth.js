@@ -10,7 +10,7 @@ const fetchUser = (
   axios({
     method: 'get',
     withCredentials: true,
-    url: 'http://localhost:4000/user'
+    url: process.env.REACT_APP_USER_URL
   })
     .then((response) => {
       if (response.data) {

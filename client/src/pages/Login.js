@@ -47,9 +47,8 @@ const Login = () => {
                 method: 'post',
                 data: values,
                 withCredentials: true,
-                url: 'http://localhost:4000/login'
+                url: process.env.REACT_APP_LOGIN_URL
               }).then((res) => {
-                console.log(res);
                 if (res.data === 'Successfully Authenticated') {
                   setIsLoggedIn(true);
                   navigate('/app/dashboard', { replace: true });

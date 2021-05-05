@@ -90,7 +90,7 @@ const Register = () => {
                 method: 'post',
                 data: values,
                 withcredentials: true,
-                url: 'http://localhost:4000/register'
+                url: process.env.REACT_APP_REGISTER_URL
               }).then((res) => {
                 resetForm({ values: '' });
                 setSnackbarMessage(res.data);

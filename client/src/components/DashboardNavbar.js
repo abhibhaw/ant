@@ -43,7 +43,7 @@ const DashboardNavbar = ({ onMobileNavOpen, ...rest }) => {
               axios({
                 method: 'get',
                 withCredentials: true,
-                url: 'http://localhost:4000/logout'
+                url: process.env.REACT_APP_LOGOUT_URL
               }).then(() => {
                 setLoading(false);
                 setIsLoggedIn(false);
@@ -60,7 +60,7 @@ const DashboardNavbar = ({ onMobileNavOpen, ...rest }) => {
               axios({
                 method: 'get',
                 withCredentials: true,
-                url: 'http://localhost:4000/logout'
+                url: process.env.REACT_APP_LOGOUT_URL
               }).then(() => {
                 setLoading(false);
                 setIsLoggedIn(false);

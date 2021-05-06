@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useMutation, gql } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import {
   Box,
   Button,
@@ -10,31 +10,23 @@ import {
   Grid,
   TextField
 } from '@material-ui/core';
+import { ADD_HUB } from './hubMutation';
+import GET_HUBS from './hubQuery';
 import Loading from '../shared/Loading';
 
-const ADD_HUB = gql`
-  mutation AddHub(
-    $hubName: String!
-    $address: String!
-    $email: String!
-    $mobileNo: String!
-  ) {
-    addHub(
-      hubName: $hubName
-      address: $address
-      email: $email
-      mobileNo: $mobileNo
-    ) {
-      id
-      hubName
-      address
-      email
-      mobileNo
-    }
-  }
-`;
 const AddHub = (props) => {
-  const [addHub, { data, loading, error }] = useMutation(ADD_HUB);
+  const [addHub, addedHubData] = useMutation(ADD_HUB, {
+    // eslint-disable-next-line no-shadow
+    update(cache, { data: { addHub } }) {
+      const existingHubs = cache.readQuery({ query: GET_HUBS });
+      cache.writeQuery({
+        query: GET_HUBS,
+        data: {
+          hubs: [addHub, ...existingHubs.hubs]
+        }
+      });
+    }
+  });
   const [values, setValues] = useState({
     hubName: '',
     address: '',
@@ -57,14 +49,14 @@ const AddHub = (props) => {
         email: values.email,
         mobileNo: values.mobileNo
       }
-    }).then(console.log(data));
+    });
   };
 
-  if (loading) return <Loading />;
-  if (error) return <p>Error...</p>;
+  if (addedHubData.loading) return <Loading />;
+  if (addedHubData.error) return <p>Error...</p>;
 
   return (
-    <form autoComplete="off" noValidate {...props} onSubmit={handleSubmit}>
+    <form autoComplete="off" {...props} onSubmit={handleSubmit}>
       <Card>
         <CardHeader subheader="All fields are required." title="Add New Hub" />
         <Divider />
@@ -97,6 +89,7 @@ const AddHub = (props) => {
               <TextField
                 fullWidth
                 label="Email Address"
+                type="email"
                 name="email"
                 onChange={handleChange}
                 required

@@ -1,5 +1,5 @@
 const graphql = require("graphql");
-const { GraphQLNonNull, GraphQLString } = graphql;
+const { GraphQLNonNull, GraphQLString, GraphQLID } = graphql;
 
 const RegionType = require("../../types/geolocationType/regionType");
 const Region = require("../../../models/geolocation/region");
@@ -19,4 +19,14 @@ const addRegion = {
   },
 };
 
-module.exports = { addRegion };
+const deleteRegion = {
+  type: RegionType,
+  args: { id: { type: new GraphQLNonNull(GraphQLID) } },
+  resolve(parent, args) {
+    return Region.deleteOne({ _id: args.id }, function (err, res) {
+      return "Success!";
+    });
+  },
+};
+
+module.exports = { addRegion, deleteRegion };

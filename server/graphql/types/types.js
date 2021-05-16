@@ -52,6 +52,22 @@ const LocationType = new GraphQLObjectType({
   }),
 });
 
-// -----------------------------------------------Geolocation Types Ends------------------------------------------------------
+// -----------------------------------------------Executives Types Start----------------------------------------------------
 
-module.exports = { HubType, RegionType, LocationType };
+const RouteType = new GraphQLObjectType({
+  name: "Route",
+  fields: () => ({
+    id: { type: GraphQLID },
+    routeName: { type: GraphQLString },
+    locations: {
+      type: GraphQLList(LocationType),
+      resolve(parent, args) {
+        return Location.find({ routeID: parent.id });
+      },
+    },
+  }),
+});
+
+// -----------------------------------------------Executives Types Ends----------------------------------------------------
+
+module.exports = { HubType, RegionType, LocationType, RouteType };

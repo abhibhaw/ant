@@ -9,6 +9,13 @@ const locationSchema = new Schema(
       type: String,
       required: [true, "Every location must have atleast one region."],
     },
+    routeID: {
+      type: String,
+      required: [
+        true,
+        "Every location should be assigned to atleast one Route.",
+      ],
+    },
   },
   { timestamps: true }
 );

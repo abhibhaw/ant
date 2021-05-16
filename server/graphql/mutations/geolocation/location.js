@@ -9,11 +9,13 @@ const addLocation = {
   args: {
     name: { type: new GraphQLNonNull(GraphQLString) },
     regionID: { type: new GraphQLNonNull(GraphQLString) },
+    routeID: { type: new GraphQLNonNull(GraphQLString) },
   },
   resolve(parent, args) {
     let location = new Location({
       name: args.name,
       regionID: args.regionID,
+      routeID: args.routeID,
     });
     return location.save();
   },

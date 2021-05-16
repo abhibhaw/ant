@@ -3,6 +3,7 @@ const { GraphQLObjectType, GraphQLID, GraphQLString, GraphQLList } = graphql;
 const Hub = require("../../models/geolocation/hub");
 const Region = require("../../models/geolocation/region");
 const Location = require("../../models/geolocation/location");
+const Route = require("../../models/executives/route");
 
 // -----------------------------------------------Geolocation Types Starts----------------------------------------------
 const HubType = new GraphQLObjectType({
@@ -43,10 +44,17 @@ const LocationType = new GraphQLObjectType({
     id: { type: GraphQLID },
     name: { type: GraphQLString },
     regionID: { type: GraphQLString },
+    routeID: { type: GraphQLString },
     region: {
       type: RegionType,
       resolve(parent, args) {
         return Region.findById(parent.regionID);
+      },
+    },
+    route: {
+      type: RouteType,
+      resolve(parent, args) {
+        return Route.findById(parent.routeID);
       },
     },
   }),

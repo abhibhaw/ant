@@ -1,7 +1,7 @@
 const graphql = require("graphql");
 const { GraphQLNonNull, GraphQLString, GraphQLID } = graphql;
 
-const RegionType = require("../../types/geolocationType/regionType");
+const { RegionType } = require("../../types/types");
 const Region = require("../../../models/geolocation/region");
 
 const addRegion = {

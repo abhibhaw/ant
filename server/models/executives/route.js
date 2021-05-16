@@ -4,9 +4,7 @@ const Schema = mongoose.Schema;
 
 const routeSchema = new Schema(
   {
-    routeName: String,
-    executiveID: String,
-    hubID: String,
+    routeName: { type: String, required: [true, "Route Name is Required."] },
   },
   { timestamps: true }
 );

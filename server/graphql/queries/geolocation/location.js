@@ -1,7 +1,7 @@
 const graphql = require("graphql");
 const { GraphQLList, GraphQLID } = graphql;
 
-const LocationType = require("../../types/geolocationType/locationType");
+const { LocationType } = require("../../types/types");
 const Location = require("../../../models/geolocation/location");
 
 const locations = {

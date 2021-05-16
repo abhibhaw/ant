@@ -8,6 +8,10 @@ Project developed and owned by [GEPTON](https://gepton.com)
 
 # Project Structure
 ![Ant](https://user-images.githubusercontent.com/39991296/117089133-43c82800-ad72-11eb-8d4f-13f5c7f62ebf.png)
+
+# Initial DB Overview
+![Ant_DB](https://user-images.githubusercontent.com/39991296/118390701-1ae74300-b64e-11eb-93a3-6370b31529a9.png)
+
 # Installation Guide
 
 `cd client or server`

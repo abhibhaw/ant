@@ -10,7 +10,7 @@ const executiveSchema = new Schema(
       type: String,
       required: [true, "Phone Number is their username, so Mandatory"],
     },
-    photoUrl: {
+    photoURL: {
       type: String,
       default:
         "https://github.com/GEPTON-INFOTECH/GEPTON-INFOTECH/raw/main/branding/xori.jpeg",

@@ -6,6 +6,7 @@ const { regions, region } = require("./geolocation/region");
 const { hubs, hub } = require("./geolocation/hub");
 const { locations, location } = require("./geolocation/location");
 const { routes, route } = require("./executive/route");
+const { executives, executive } = require("./executive/executive");
 
 const RootQuery = new GraphQLObjectType({
   name: "RootQueryType",
@@ -20,6 +21,8 @@ const RootQuery = new GraphQLObjectType({
     // Executives
     routes: routes,
     route: route,
+    executives: executives,
+    executive: executive,
   },
 });
 

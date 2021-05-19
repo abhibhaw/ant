@@ -1,5 +1,11 @@
 const graphql = require("graphql");
-const { GraphQLObjectType, GraphQLID, GraphQLString, GraphQLList } = graphql;
+const {
+  GraphQLObjectType,
+  GraphQLID,
+  GraphQLString,
+  GraphQLList,
+  GraphQLBoolean,
+} = graphql;
 const Hub = require("../../models/geolocation/hub");
 const Region = require("../../models/geolocation/region");
 const Location = require("../../models/geolocation/location");
@@ -76,6 +82,32 @@ const RouteType = new GraphQLObjectType({
   }),
 });
 
+const ExecutiveType = new GraphQLObjectType({
+  name: "Executive",
+  fields: () => ({
+    id: { type: GraphQLID },
+    firstName: { type: GraphQLString },
+    lastName: { type: GraphQLString },
+    isActive: { type: GraphQLBoolean },
+    phone: { type: GraphQLString },
+    password: { type: GraphQLString },
+    photoURL: { type: GraphQLString },
+    routeID: { type: GraphQLString },
+    route: {
+      type: RouteType,
+      resolve(parent, args) {
+        return Route.findById(parent.routeID);
+      },
+    },
+  }),
+});
+
 // -----------------------------------------------Executives Types Ends----------------------------------------------------
 
-module.exports = { HubType, RegionType, LocationType, RouteType };
+module.exports = {
+  HubType,
+  RegionType,
+  LocationType,
+  RouteType,
+  ExecutiveType,
+};

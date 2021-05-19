@@ -10,6 +10,7 @@ const Hub = require("../../models/geolocation/hub");
 const Region = require("../../models/geolocation/region");
 const Location = require("../../models/geolocation/location");
 const Route = require("../../models/executives/route");
+const Executive = require("../../models/executives/executive");
 
 // -----------------------------------------------Geolocation Types Starts----------------------------------------------
 const HubType = new GraphQLObjectType({
@@ -73,6 +74,12 @@ const RouteType = new GraphQLObjectType({
   fields: () => ({
     id: { type: GraphQLID },
     routeName: { type: GraphQLString },
+    executive: {
+      type: GraphQLList(ExecutiveType),
+      resolve(parent, args) {
+        return Executive.find({ routeID: parent.id });
+      },
+    },
     locations: {
       type: GraphQLList(LocationType),
       resolve(parent, args) {

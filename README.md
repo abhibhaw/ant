@@ -14,13 +14,13 @@ Project developed and owned by [GEPTON](https://gepton.com)
 
 # Installation Guide
 
-`cd client or server`
+`cd server`
 <br>
 `yarn`
 <br>
 `yarn start`
 <br>
-`Default PORTS: Server-3000, Client-4000`
+`Default PORTS: 3000`
 
 # Contributing
 

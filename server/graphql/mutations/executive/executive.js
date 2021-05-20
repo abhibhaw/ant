@@ -16,9 +16,9 @@ const addExecutive = {
     photoURL: { type: GraphQLString },
     routeID: { type: new GraphQLNonNull(GraphQLString) },
   },
-  resolve(parent, args) {
-    Executive.findOne({ phone: args.phone }, async (err, doc) => {
-      if (err) throw err;
+  async resolve(parent, args) {
+    try {
+      const doc = await Executive.findOne({ phone: args.phone });
       if (doc) throw new Error("User Already Exists");
       if (!doc) {
         const hashedPass = await bcrypt.hash(args.password, 10);
@@ -33,7 +33,9 @@ const addExecutive = {
         });
         return await executive.save();
       }
-    });
+    } catch (e) {
+      throw new Error(e);
+    }
   },
 };
 

@@ -1,0 +1,40 @@
+name: Backend Deploy
+
+on:
+  push:
+
+env:
+  DB_URL: ${{ secrets.DB_URL }}
+  ENCRYPTION_SECRET: ${{ secrets.ENCRYPTION_SECRET }}
+  ALLOWED_CLIENT_URL: ${{ secrets.ALLOWED_CLIENT_URL }}
+
+jobs:
+  build:
+    runs-on: [self-hosted, server]
+    defaults:
+      run:
+        shell: bash
+        working-directory: server
+
+    strategy:
+      matrix:
+        node-version: [14.x]
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Deploy Server
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+          
+      - name: Create .env File
+        run: |
+          touch .env
+          echo DB_URL=$DB_URL >> .env
+          echo ENCRYPTION_SECRET=$ENCRYPTION_SECRET >> .env
+          echo ALLOWED_CLIENT_URL=$ALLOWED_CLIENT_URL >> .env
+          cat .env
+             
+      - run: yarn
+      - run: env
+      - run: pm2 restart server

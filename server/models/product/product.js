@@ -14,7 +14,7 @@ const productSchema = new Schema(
     photoURL: {
       type: String,
       default:
-        "https://github.com/GEPTON-INFOTECH/GEPTON-INFOTECH/raw/main/branding/xori.jpeg",
+        "https://github.com/GEPTON-INFOTECH/GEPTON-INFOTECH/raw/main/branding/no_image.png",
     },
     statusHub: { type: [String] },
   },

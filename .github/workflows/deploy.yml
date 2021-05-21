@@ -10,7 +10,7 @@ env:
 
 jobs:
   build:
-    runs-on: self-hosted
+    runs-on: [self-hosted, milkton]
     defaults:
       run:
         shell: bash
@@ -35,5 +35,5 @@ jobs:
           echo ALLOWED_CLIENT_URL=$ALLOWED_CLIENT_URL >> .env
           cat .env
              
-      - run: yarn
+      - run: npm ci
       - run: NODE_ENV=production pm2 restart server

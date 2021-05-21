@@ -109,7 +109,17 @@ const ExecutiveType = new GraphQLObjectType({
   }),
 });
 
-// -----------------------------------------------Executives Types Ends----------------------------------------------------
+// -----------------------------------------------Product Types Start----------------------------------------------------
+
+const CategoryType = new GraphQLObjectType({
+  name: "Category",
+  fields: () => ({
+    id: { type: GraphQLID },
+    name: { type: GraphQLString },
+  }),
+});
+
+// -----------------------------------------------------Exports Here----------------------------------------------------------
 
 module.exports = {
   HubType,
@@ -117,4 +127,5 @@ module.exports = {
   LocationType,
   RouteType,
   ExecutiveType,
+  CategoryType,
 };

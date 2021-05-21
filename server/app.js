@@ -8,6 +8,7 @@ const schema = require("./graphql/schema");
 const passport = require("passport");
 const bcrypt = require("bcryptjs");
 const Admin = require("./models/admins/admin");
+const Executive = require("./models/executives/executive");
 
 // -------------------------------------END OF IMPORTS-------------------------------------
 
@@ -49,6 +50,8 @@ app.get("/", function (req, res) {
   res.send("Hello from API");
 });
 
+// ------------------------------------------------Admin Login----------------------------------------------------
+
 app.post("/login", function (req, res, next) {
   passport.authenticate("local", (err, user, info) => {
     if (err) throw err;
@@ -88,6 +91,39 @@ app.get("/logout", function (req, res) {
   req.logout();
   res.send(req.user);
 });
+
+// ------------------------------------------------Executive Login----------------------------------------------------
+
+app.post("/executive/login", function (executiveRequest, executiveResponse) {
+  Executive.findOne(
+    { phone: executiveRequest.body.phone },
+    async (err, executive) => {
+      if (err) return executiveResponse.status(500).json({ err });
+      if (!executive) return executiveResponse.send("No such executive exist");
+      if (executive) {
+        bcrypt.compare(
+          executiveRequest.body.password,
+          executive.password,
+          (err, result) => {
+            if (err) return executiveResponse.status(501).json({ err });
+            if (result === true) {
+              return executiveResponse.json({
+                status: "Authenticated",
+                id: executive._id,
+                phone: executive.phone,
+                firstName: executive.firstName,
+                lastName: executive.lastName,
+              });
+            } else {
+              return executiveResponse.send("Wrong Password");
+            }
+          }
+        );
+      }
+    }
+  );
+});
+
 // -------------------------------------END OF ROUTES-------------------------------------
 
 app.listen(4000, () => {

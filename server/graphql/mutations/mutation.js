@@ -6,6 +6,7 @@ const { addRegion, deleteRegion } = require("./geolocation/region");
 const { addHub, deleteHub } = require("./geolocation/hub");
 const { addRoute, deleteRoute } = require("./executive/route");
 const { addExecutive, deleteExecutive } = require("./executive/executive");
+const { addCategory, deleteCategory } = require("./product/category");
 
 const Mutation = new GraphQLObjectType({
   name: "Mutation",
@@ -22,6 +23,9 @@ const Mutation = new GraphQLObjectType({
     deleteRoute,
     addExecutive,
     deleteExecutive,
+    // Product Mutation
+    addCategory,
+    deleteCategory,
   },
 });
 

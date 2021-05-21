@@ -35,5 +35,5 @@ jobs:
           echo ALLOWED_CLIENT_URL=$ALLOWED_CLIENT_URL >> .env
           cat .env
              
-      - run: npm ci
+      - run: npm install
       - run: NODE_ENV=production pm2 restart server

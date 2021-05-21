@@ -10,7 +10,7 @@ env:
 
 jobs:
   build:
-    runs-on: [self-hosted, milkton]
+    runs-on: [self-hosted, server]
     defaults:
       run:
         shell: bash

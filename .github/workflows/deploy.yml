@@ -10,7 +10,7 @@ env:
 
 jobs:
   build:
-    runs-on: self-hosted
+    runs-on: [self-hosted, milkton]
     defaults:
       run:
         shell: bash
@@ -36,5 +36,4 @@ jobs:
           cat .env
              
       - run: yarn
-      - run: env
-      - run: pm2 restart server
+      - run: NODE_ENV=production pm2 restart server

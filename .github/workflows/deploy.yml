@@ -37,5 +37,5 @@ jobs:
           echo GRAPHIQL=$GRAPHIQL >> .env
           cat .env
 
-      - run: npm install
+      - run: yarn
       - run: NODE_ENV=production pm2 restart server

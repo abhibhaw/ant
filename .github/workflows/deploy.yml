@@ -7,6 +7,7 @@ env:
   DB_URL: ${{ secrets.DB_URL }}
   ENCRYPTION_SECRET: ${{ secrets.ENCRYPTION_SECRET }}
   ALLOWED_CLIENT_URL: ${{ secrets.ALLOWED_CLIENT_URL }}
+  GRAPHIQL: ${{ secrets.GRAPHIQL }}
 
 jobs:
   build:
@@ -26,14 +27,15 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
-          
+
       - name: Create .env File
         run: |
           touch .env
           echo DB_URL=$DB_URL >> .env
           echo ENCRYPTION_SECRET=$ENCRYPTION_SECRET >> .env
           echo ALLOWED_CLIENT_URL=$ALLOWED_CLIENT_URL >> .env
+          echo GRAPHIQL=$GRAPHIQL >> .env
           cat .env
-             
+
       - run: npm install
       - run: NODE_ENV=production pm2 restart server

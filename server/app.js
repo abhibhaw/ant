@@ -40,10 +40,9 @@ app.use(
   "/api",
   graphqlHTTP({
     schema,
-    graphiql: true,
+    graphiql: Boolean(process.env.GRAPHIQL),
   })
 );
-
 // -------------------------------------END OF MIDDLEWARES-------------------------------------
 
 app.get("/", function (req, res) {

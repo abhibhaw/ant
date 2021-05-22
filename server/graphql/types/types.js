@@ -145,6 +145,13 @@ const ProductType = new GraphQLObjectType({
         return Category.findById(parent.categoryID);
       },
     },
+
+    hubs: {
+      type: GraphQLList(HubType),
+      resolve(parent, args) {
+        return Hub.find({ _id: { $in: parent.statusHub } });
+      },
+    },
   }),
 });
 
@@ -171,6 +178,12 @@ const CustomerType = new GraphQLObjectType({
     phone: { type: GraphQLString },
     locationID: { type: GraphQLString },
     email: { type: GraphQLString },
+    location: {
+      type: LocationType,
+      resolve(parent, args) {
+        return Location.findById(parent.locationID);
+      },
+    },
     addresses: {
       type: GraphQLList(AddressType),
       resolve(parent, args) {

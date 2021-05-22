@@ -14,6 +14,7 @@ const Route = require("../../models/executives/route");
 const Executive = require("../../models/executives/executive");
 const Category = require("../../models/product/category");
 const Product = require("../../models/product/product");
+const Address = require("../../models/customer/address");
 
 // -----------------------------------------------Geolocation Types Starts----------------------------------------------
 const HubType = new GraphQLObjectType({
@@ -147,6 +148,38 @@ const ProductType = new GraphQLObjectType({
   }),
 });
 
+// -----------------------------------------------Customer Types Start----------------------------------------------------
+
+const AddressType = new GraphQLObjectType({
+  name: "Address",
+  fields: () => ({
+    id: { type: GraphQLID },
+    name: { type: GraphQLString },
+    customerID: { type: GraphQLString },
+    lat: { type: GraphQLString },
+    long: { type: GraphQLString },
+  }),
+});
+
+const CustomerType = new GraphQLObjectType({
+  name: "Customer",
+  fields: () => ({
+    id: { type: GraphQLID },
+    firstName: { type: GraphQLString },
+    lastName: { type: GraphQLString },
+    wallet: { type: GraphQLInt },
+    phone: { type: GraphQLString },
+    locationID: { type: GraphQLString },
+    email: { type: GraphQLString },
+    addresses: {
+      type: GraphQLList(AddressType),
+      resolve(parent, args) {
+        return Address.find({ customerID: parent.id });
+      },
+    },
+  }),
+});
+
 // -----------------------------------------------------Exports Here----------------------------------------------------------
 
 module.exports = {
@@ -157,4 +190,6 @@ module.exports = {
   ExecutiveType,
   CategoryType,
   ProductType,
+  AddressType,
+  CustomerType,
 };

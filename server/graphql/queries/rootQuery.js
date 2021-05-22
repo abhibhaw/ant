@@ -9,6 +9,7 @@ const { routes, route } = require("./executive/route");
 const { executives, executive } = require("./executive/executive");
 const { categories, category } = require("./product/category");
 const { products, product } = require("./product/product");
+const { customers, customer } = require("./customer/customer");
 
 const RootQuery = new GraphQLObjectType({
   name: "RootQueryType",
@@ -30,6 +31,9 @@ const RootQuery = new GraphQLObjectType({
     category: category,
     products: products,
     product: product,
+    // Customer
+    customers: customers,
+    customer: customer,
   },
 });
 

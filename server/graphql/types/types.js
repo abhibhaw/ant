@@ -5,12 +5,15 @@ const {
   GraphQLString,
   GraphQLList,
   GraphQLBoolean,
+  GraphQLInt,
 } = graphql;
 const Hub = require("../../models/geolocation/hub");
 const Region = require("../../models/geolocation/region");
 const Location = require("../../models/geolocation/location");
 const Route = require("../../models/executives/route");
 const Executive = require("../../models/executives/executive");
+const Category = require("../../models/product/category");
+const Product = require("../../models/product/product");
 
 // -----------------------------------------------Geolocation Types Starts----------------------------------------------
 const HubType = new GraphQLObjectType({
@@ -116,6 +119,31 @@ const CategoryType = new GraphQLObjectType({
   fields: () => ({
     id: { type: GraphQLID },
     name: { type: GraphQLString },
+    products: {
+      type: GraphQLList(ProductType),
+      resolve(parent, args) {
+        return Product.find({ categoryID: parent.id });
+      },
+    },
+  }),
+});
+
+const ProductType = new GraphQLObjectType({
+  name: "Product",
+  fields: () => ({
+    id: { type: GraphQLID },
+    name: { type: GraphQLString },
+    categoryID: { type: GraphQLString },
+    description: { type: GraphQLString },
+    photoURL: { type: GraphQLString },
+    price: { type: GraphQLInt },
+    statusHub: { type: GraphQLList(GraphQLString) },
+    category: {
+      type: CategoryType,
+      resolve(parent, args) {
+        return Category.findById(parent.categoryID);
+      },
+    },
   }),
 });
 
@@ -128,4 +156,5 @@ module.exports = {
   RouteType,
   ExecutiveType,
   CategoryType,
+  ProductType,
 };

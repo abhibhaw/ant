@@ -14,8 +14,13 @@ const orderSchema = new Schema(
       required: [true, "Subscription Identifier should be supplied"],
     },
     items: {
-      type: Map,
-      of: String,
+      type: [
+        {
+          productID: String,
+          quantity: Number,
+        },
+      ],
+      required: [true, "Any order without item is useless."],
     },
     deliveryDate: {
       type: Date,

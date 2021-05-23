@@ -15,6 +15,7 @@ const {
   address,
   addressByCustomerID,
 } = require("./customer/address");
+const { subscriptions, subscription } = require("./order/subscription");
 
 const RootQuery = new GraphQLObjectType({
   name: "RootQueryType",
@@ -42,6 +43,9 @@ const RootQuery = new GraphQLObjectType({
     addresses: addresses,
     address: address,
     addressByCustomerID: addressByCustomerID,
+    // Subscription
+    subscription: subscription,
+    subscriptions: subscriptions,
   },
 });
 

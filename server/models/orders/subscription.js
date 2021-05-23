@@ -9,8 +9,13 @@ const subscriptionSchema = new Schema(
       required: [true, "Customer Details are Required."],
     },
     items: {
-      type: Map,
-      of: String,
+      type: [
+        {
+          productID: String,
+          quantity: Number,
+        },
+      ],
+      required: [true, "Any order without item is useless."],
     },
     startDate: {
       type: Date,
@@ -18,7 +23,6 @@ const subscriptionSchema = new Schema(
     },
     nextDeliveryDate: {
       type: Date,
-      default: startDate,
     },
     endDate: { type: Date },
     addressID: {

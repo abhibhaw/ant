@@ -7,6 +7,8 @@ const {
   GraphQLBoolean,
   GraphQLInt,
 } = graphql;
+const { DateType, ItemType } = require("./scalarTypes");
+
 const Hub = require("../../models/geolocation/hub");
 const Region = require("../../models/geolocation/region");
 const Location = require("../../models/geolocation/location");
@@ -15,6 +17,7 @@ const Executive = require("../../models/executives/executive");
 const Category = require("../../models/product/category");
 const Product = require("../../models/product/product");
 const Address = require("../../models/customer/address");
+const Customer = require("../../models/customer/customer");
 
 // -----------------------------------------------Geolocation Types Starts----------------------------------------------
 const HubType = new GraphQLObjectType({
@@ -193,6 +196,43 @@ const CustomerType = new GraphQLObjectType({
   }),
 });
 
+// ---------------------------------------------------Order Types Start------------------------------------------------------
+
+const SubscriptionType = new GraphQLObjectType({
+  name: "Subscription",
+  fields: () => ({
+    id: { type: GraphQLID },
+    customerID: { type: GraphQLString },
+    items: {
+      type: GraphQLList(ItemType),
+    },
+    startDate: {
+      type: DateType,
+    },
+    endDate: {
+      type: DateType,
+    },
+    nextDeliveryDate: {
+      type: DateType,
+    },
+    addressID: { type: GraphQLString },
+    frequency: { type: GraphQLInt },
+    status: { type: GraphQLString },
+    customer: {
+      type: CustomerType,
+      resolve(parent, args) {
+        return Customer.findById(parent.customerID);
+      },
+    },
+    address: {
+      type: AddressType,
+      resolve(parent, args) {
+        return Address.findById(parent.addressID);
+      },
+    },
+  }),
+});
+
 // -----------------------------------------------------Exports Here----------------------------------------------------------
 
 module.exports = {
@@ -205,4 +245,5 @@ module.exports = {
   ProductType,
   AddressType,
   CustomerType,
+  SubscriptionType,
 };

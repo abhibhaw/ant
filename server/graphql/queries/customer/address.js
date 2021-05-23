@@ -19,4 +19,12 @@ const address = {
   },
 };
 
-module.exports = { addresses, address };
+const addressByCustomerID = {
+  type: new GraphQLList(AddressType),
+  args: { customerID: { type: GraphQLID } },
+  resolve(parent, args) {
+    return Address.find({ customerID: args.customerID });
+  },
+};
+
+module.exports = { addresses, address, addressByCustomerID };

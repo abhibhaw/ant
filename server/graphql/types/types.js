@@ -198,6 +198,39 @@ const CustomerType = new GraphQLObjectType({
 
 // ---------------------------------------------------Order Types Start------------------------------------------------------
 
+const OrderType = new GraphQLObjectType({
+  name: "Order",
+  fields: () => ({
+    id: { type: GraphQLID },
+    customerID: { type: GraphQLString },
+    routeID: { type: GraphQLString },
+    isSub: { type: GraphQLBoolean },
+    items: {
+      type: GraphQLList(ItemType),
+    },
+    deliveryDate: {
+      type: DateType,
+    },
+    addressID: { type: GraphQLString },
+    status: { type: GraphQLString },
+    comment: { type: GraphQLString },
+    customer: {
+      type: CustomerType,
+      resolve(parent, args) {
+        return Customer.findById(parent.customerID);
+      },
+    },
+    address: {
+      type: AddressType,
+      resolve(parent, args) {
+        return Address.findById(parent.addressID);
+      },
+    },
+  }),
+});
+
+// ---------------------------------------------------Subscription Types Start-----------------------------------------------------
+
 const SubscriptionType = new GraphQLObjectType({
   name: "Subscription",
   fields: () => ({
@@ -233,6 +266,27 @@ const SubscriptionType = new GraphQLObjectType({
   }),
 });
 
+// ---------------------------------------------------Transaction Types Start-----------------------------------------------------
+
+const TransactionType = new GraphQLObjectType({
+  name: "Transaction",
+  fields: () => ({
+    id: { type: GraphQLID },
+    subTotal: { type: GraphQLInt },
+    orderID: { type: GraphQLString },
+    isDebit: { type: GraphQLBoolean },
+    customerID: { type: GraphQLString },
+    date: { type: DateType },
+    comment: { type: GraphQLString },
+    customer: {
+      type: CustomerType,
+      resolve(parent, args) {
+        return Customer.findById(parent.customerID);
+      },
+    },
+  }),
+});
+
 // -----------------------------------------------------Exports Here----------------------------------------------------------
 
 module.exports = {
@@ -246,4 +300,6 @@ module.exports = {
   AddressType,
   CustomerType,
   SubscriptionType,
+  OrderType,
+  TransactionType,
 };

@@ -11,6 +11,7 @@ const orderSchema = new Schema(
     routeID: { type: String, required: [true, "Delivery Route is Important"] },
     isSub: {
       type: Boolean,
+      default: false,
       required: [true, "Subscription Identifier should be supplied"],
     },
     items: {

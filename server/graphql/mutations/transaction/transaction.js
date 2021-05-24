@@ -34,7 +34,6 @@ const addTransaction = {
       if (!args.isDebit) {
         wallet += parseInt(args.subTotal, 10);
       }
-      console.log(wallet);
       await Customer.updateOne(
         { _id: args.customerID },
         {

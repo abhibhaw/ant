@@ -1,7 +1,8 @@
 const graphql = require("graphql");
 const { GraphQLNonNull, GraphQLString, GraphQLID, GraphQLInt, GraphQLList } =
   graphql;
-const { DateType, ItemType } = require("../../types/scalarTypes");
+const { GraphQLDateTime } = require("graphql-iso-date");
+const ItemType = require("../../types/scalarTypes");
 
 const { SubscriptionType } = require("../../types/types");
 const Subscription = require("../../../models/orders/subscription");
@@ -13,8 +14,8 @@ const addSubscription = {
     items: {
       type: new GraphQLNonNull(GraphQLList(ItemType)),
     },
-    startDate: { type: new GraphQLNonNull(DateType) },
-    endDate: { type: DateType },
+    startDate: { type: new GraphQLNonNull(GraphQLDateTime) },
+    endDate: { type: GraphQLDateTime },
     addressID: { type: new GraphQLNonNull(GraphQLString) },
     frequency: { type: new GraphQLNonNull(GraphQLInt) },
     status: { type: GraphQLString },

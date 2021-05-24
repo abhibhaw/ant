@@ -7,7 +7,8 @@ const {
   GraphQLBoolean,
   GraphQLInt,
 } = graphql;
-const { DateType, ItemType } = require("./scalarTypes");
+const { GraphQLDateTime } = require("graphql-iso-date");
+const ItemType = require("./scalarTypes");
 
 const Hub = require("../../models/geolocation/hub");
 const Region = require("../../models/geolocation/region");
@@ -209,7 +210,7 @@ const OrderType = new GraphQLObjectType({
       type: GraphQLList(ItemType),
     },
     deliveryDate: {
-      type: DateType,
+      type: GraphQLDateTime,
     },
     addressID: { type: GraphQLString },
     status: { type: GraphQLString },
@@ -240,13 +241,13 @@ const SubscriptionType = new GraphQLObjectType({
       type: GraphQLList(ItemType),
     },
     startDate: {
-      type: DateType,
+      type: GraphQLDateTime,
     },
     endDate: {
-      type: DateType,
+      type: GraphQLDateTime,
     },
     nextDeliveryDate: {
-      type: DateType,
+      type: GraphQLDateTime,
     },
     addressID: { type: GraphQLString },
     frequency: { type: GraphQLInt },
@@ -276,7 +277,7 @@ const TransactionType = new GraphQLObjectType({
     orderID: { type: GraphQLString },
     isDebit: { type: GraphQLBoolean },
     customerID: { type: GraphQLString },
-    date: { type: DateType },
+    date: { type: GraphQLDateTime },
     comment: { type: GraphQLString },
     customer: {
       type: CustomerType,

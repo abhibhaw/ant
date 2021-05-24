@@ -3,11 +3,11 @@ const {
   GraphQLNonNull,
   GraphQLString,
   GraphQLID,
-  GraphQLInt,
   GraphQLList,
   GraphQLBoolean,
 } = graphql;
-const { DateType, ItemType } = require("../../types/scalarTypes");
+const { GraphQLDateTime } = require("graphql-iso-date");
+const ItemType = require("../../types/scalarTypes");
 
 const { OrderType } = require("../../types/types");
 const Order = require("../../../models/orders/order");
@@ -20,7 +20,7 @@ const addOrder = {
     items: {
       type: new GraphQLNonNull(GraphQLList(ItemType)),
     },
-    deliveryDate: { type: new GraphQLNonNull(DateType) },
+    deliveryDate: { type: new GraphQLNonNull(GraphQLDateTime) },
     isSub: { type: GraphQLBoolean },
     addressID: { type: new GraphQLNonNull(GraphQLString) },
     status: { type: GraphQLString },

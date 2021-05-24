@@ -1,10 +1,4 @@
-const { GraphQLScalarType } = require("graphql");
-
-const dateValue = (value) => {
-  if (value instanceof Date) {
-    return +value;
-  }
-};
+const { GraphQLScalarType, GraphQLString, GraphQLInt } = require("graphql");
 
 const itemValue = (value) => {
   return value;
@@ -12,17 +6,10 @@ const itemValue = (value) => {
 
 const ItemType = new GraphQLScalarType({
   name: "Item",
-  serialize: itemValue,
-  parseValue: itemValue,
+  fields: () => ({
+    productID: GraphQLString,
+    quantity: GraphQLInt,
+  }),
 });
 
-const DateType = new GraphQLScalarType({
-  name: "Date",
-  serialize: dateValue,
-  parseValue: dateValue,
-  parseLiteral(ast) {
-    return dateValue(ast.value);
-  },
-});
-
-module.exports = { DateType, ItemType };
+module.exports = ItemType;

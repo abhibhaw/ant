@@ -1,7 +1,6 @@
 const graphql = require("graphql");
 const { GraphQLNonNull, GraphQLString, GraphQLInt, GraphQLBoolean } = graphql;
-const { DateType, ItemType } = require("../../types/scalarTypes");
-
+const { GraphQLDateTime } = require("graphql-iso-date");
 const { TransactionType } = require("../../types/types");
 const Customer = require("../../../models/customer/customer");
 const Transaction = require("../../../models/transaction/transaction");
@@ -12,7 +11,7 @@ const addTransaction = {
     subTotal: { type: new GraphQLNonNull(GraphQLInt) },
     customerID: { type: new GraphQLNonNull(GraphQLString) },
     orderID: { type: GraphQLString },
-    date: { type: new GraphQLNonNull(DateType) },
+    date: { type: new GraphQLNonNull(GraphQLDateTime) },
     isDebit: { type: new GraphQLNonNull(GraphQLBoolean) },
     comment: { type: GraphQLString },
   },

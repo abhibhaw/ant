@@ -15,7 +15,7 @@ const addTransaction = {
     isDebit: { type: new GraphQLNonNull(GraphQLBoolean) },
     comment: { type: GraphQLString },
   },
-  resolve(parent, args) {
+  async resolve(parent, args) {
     let transaction = new Transaction({
       customerID: args.customerID,
       subTotal: args.subTotal,
@@ -24,7 +24,7 @@ const addTransaction = {
       date: args.date,
       comment: args.comment,
     });
-    Customer.findById(args.customerID, async (err, result) => {
+    await Customer.findById(args.customerID, async (err, result) => {
       if (err) throw new Error(err);
       let wallet = parseInt(result.wallet, 10);
       if (args.isDebit) {

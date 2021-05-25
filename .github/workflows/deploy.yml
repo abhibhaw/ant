@@ -8,6 +8,8 @@ env:
   ENCRYPTION_SECRET: ${{ secrets.ENCRYPTION_SECRET }}
   ALLOWED_CLIENT_URL: ${{ secrets.ALLOWED_CLIENT_URL }}
   GRAPHIQL: ${{ secrets.GRAPHIQL }}
+  CRON_HOUR: ${{ secrets.CRON_HOUR }}
+  CRON_MINUTES: ${{ secrets.CRON_MINUTES }}
 
 jobs:
   build:
@@ -35,6 +37,8 @@ jobs:
           echo ENCRYPTION_SECRET=$ENCRYPTION_SECRET >> .env
           echo ALLOWED_CLIENT_URL=$ALLOWED_CLIENT_URL >> .env
           echo GRAPHIQL=$GRAPHIQL >> .env
+          echo CRON_HOUR=$CRON_HOUR >> .env
+          echo CRON_MINUTES=$CRON_MINUTES >> .env
           cat .env
 
       - run: yarn

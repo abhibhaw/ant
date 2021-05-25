@@ -41,6 +41,25 @@ const addOrder = {
   },
 };
 
+const markOrder = {
+  type: OrderType,
+  args: {
+    id: { type: GraphQLNonNull(GraphQLID) },
+    status: { type: GraphQLString },
+    deliveryDate: { type: GraphQLDateTime },
+    comment: { type: GraphQLString },
+    items: { type: GraphQLList(ItemType) },
+  },
+  resolve(parent, args) {
+    return Order.findByIdAndUpdate(args.id, {
+      status: args.status,
+      deliveryDate: args.deliveryDate,
+      comment: args.comment,
+      items: args.items,
+    });
+  },
+};
+
 const deleteOrder = {
   type: OrderType,
   args: { id: { type: new GraphQLNonNull(GraphQLID) } },
@@ -51,4 +70,4 @@ const deleteOrder = {
   },
 };
 
-module.exports = { addOrder, deleteOrder };
+module.exports = { addOrder, deleteOrder, markOrder };

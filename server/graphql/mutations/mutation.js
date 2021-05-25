@@ -11,7 +11,7 @@ const { addProduct, deleteProduct } = require("./product/product");
 const { addCustomer } = require("./customer/customer");
 const { addAddress, deleteAddress } = require("./customer/address");
 const { addSubscription, deleteSubscription } = require("./order/subscription");
-const { addOrder, deleteOrder } = require("./order/order");
+const { addOrder, deleteOrder, markOrder } = require("./order/order");
 const { addTransaction } = require("./transaction/transaction");
 
 const Mutation = new GraphQLObjectType({
@@ -44,6 +44,7 @@ const Mutation = new GraphQLObjectType({
     // Order Mutation
     addOrder,
     deleteOrder,
+    markOrder,
     // Transaction
     addTransaction,
   },

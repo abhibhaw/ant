@@ -19,6 +19,7 @@ const Category = require("../../models/product/category");
 const Product = require("../../models/product/product");
 const Address = require("../../models/customer/address");
 const Customer = require("../../models/customer/customer");
+const Order = require("../../models/orders/order");
 
 // -----------------------------------------------Geolocation Types Starts----------------------------------------------
 const HubType = new GraphQLObjectType({
@@ -112,6 +113,18 @@ const ExecutiveType = new GraphQLObjectType({
       type: RouteType,
       resolve(parent, args) {
         return Route.findById(parent.routeID);
+      },
+    },
+    ordersForToday: {
+      type: GraphQLList(OrderType),
+      resolve(parent, args) {
+        const today = new Date();
+        const todayQueryDate = today.toISOString().split("T")[0];
+        return Order.find({
+          routeID: parent.routeID,
+          deliveryDate: new Date(todayQueryDate),
+          status: { $ne: "PENDING" },
+        });
       },
     },
   }),

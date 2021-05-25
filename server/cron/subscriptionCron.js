@@ -4,8 +4,11 @@ const Order = require("../models/orders/order");
 const Customer = require("../models/customer/customer");
 const Location = require("../models/geolocation/location");
 
+const cronTime =
+  process.env.CRON_MINUTES + " " + process.env.CRON_HOUR + " * * *";
+
 const Scheduler = () => {
-  cron.schedule("30 19 * * *", async () => {
+  cron.schedule(cronTime, async () => {
     const tomorrow = new Date();
     tomorrow.setDate(new Date().getDate() + 1);
     const queryDateFormat = tomorrow.toISOString().split("T")[0];

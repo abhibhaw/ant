@@ -98,7 +98,8 @@ app.post("/executive/login", function (executiveRequest, executiveResponse) {
     { phone: executiveRequest.body.phone },
     async (err, executive) => {
       if (err) return executiveResponse.status(500).json({ err });
-      if (!executive) return executiveResponse.send("No such executive exist");
+      if (!executive)
+        return executiveResponse.json({ status: "No such executive exist" });
       if (executive) {
         bcrypt.compare(
           executiveRequest.body.password,
@@ -114,7 +115,7 @@ app.post("/executive/login", function (executiveRequest, executiveResponse) {
                 lastName: executive.lastName,
               });
             } else {
-              return executiveResponse.send("Wrong Password");
+              return executiveResponse.json({ status: "Wrong Password" });
             }
           }
         );

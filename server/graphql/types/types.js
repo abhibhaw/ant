@@ -162,7 +162,6 @@ const ProductType = new GraphQLObjectType({
         return Category.findById(parent.categoryID);
       },
     },
-
     hubs: {
       type: GraphQLList(HubType),
       resolve(parent, args) {

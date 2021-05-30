@@ -51,12 +51,16 @@ const markOrder = {
     items: { type: GraphQLList(ItemType) },
   },
   resolve(parent, args) {
-    return Order.findByIdAndUpdate(args.id, {
-      status: args.status,
-      deliveryDate: args.deliveryDate,
-      comment: args.comment,
-      items: args.items,
-    });
+    return Order.findByIdAndUpdate(
+      args.id,
+      {
+        status: args.status,
+        deliveryDate: args.deliveryDate,
+        comment: args.comment,
+        items: args.items,
+      },
+      { runValidators: true, omitUndefined: true, new: true }
+    );
   },
 };
 

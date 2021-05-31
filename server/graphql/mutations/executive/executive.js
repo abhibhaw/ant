@@ -39,6 +39,34 @@ const addExecutive = {
   },
 };
 
+const editExecutive = {
+  type: ExecutiveType,
+  args: {
+    id: { type: GraphQLNonNull(GraphQLID) },
+    firstName: { type: GraphQLString },
+    lastName: { type: GraphQLString },
+    phone: { type: GraphQLString },
+    password: { type: GraphQLString },
+    routeID: { type: GraphQLString },
+    status: { type: GraphQLString },
+  },
+  async resolve(parent, args) {
+    const hashedPass = await bcrypt.hash(args.password, 10);
+    return Executive.findByIdAndUpdate(
+      args.id,
+      {
+        firstName: args.firstName,
+        lastName: args.lastName,
+        phone: args.phone,
+        password: hashedPass,
+        routeID: args.routeID,
+        status: args.status,
+      },
+      { runValidators: true, omitUndefined: true, new: true }
+    );
+  },
+};
+
 const deleteExecutive = {
   type: ExecutiveType,
   args: { id: { type: new GraphQLNonNull(GraphQLID) } },
@@ -49,4 +77,4 @@ const deleteExecutive = {
   },
 };
 
-module.exports = { addExecutive, deleteExecutive };
+module.exports = { addExecutive, deleteExecutive, editExecutive };

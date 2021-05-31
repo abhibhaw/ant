@@ -42,11 +42,11 @@ const addExecutive = {
 const editExecutive = {
   type: ExecutiveType,
   args: {
-    id: { type: GraphQLNonNull(GraphQLID) },
+    id: { type: GraphQLNonNull(GraphQLString) },
     firstName: { type: GraphQLString },
     lastName: { type: GraphQLString },
     phone: { type: GraphQLString },
-    password: { type: GraphQLString },
+    password: { type: GraphQLNonNull(GraphQLString) },
     routeID: { type: GraphQLString },
     isActive: { type: GraphQLBoolean },
   },

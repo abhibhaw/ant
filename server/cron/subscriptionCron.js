@@ -19,7 +19,7 @@ const Scheduler = () => {
         status: "ACTIVE",
       }).then((foundSubscriptions) => {
         foundSubscriptions.map(async (singleSub) => {
-          const newDeliveryDate = new Date(singleSub.nextDeliveryDate);
+          const newDeliveryDate = new Date();
           newDeliveryDate.setDate(
             new Date().getDate() + singleSub.frequency + 1
           );

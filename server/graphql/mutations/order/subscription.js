@@ -35,6 +35,35 @@ const addSubscription = {
   },
 };
 
+const editSubscription = {
+  type: SubscriptionType,
+  args: {
+    id: { type: GraphQLNonNull(GraphQLString) },
+    items: {
+      type: GraphQLList(ItemType),
+    },
+    nextDeliveryDate: { type: GraphQLDateTime },
+    endDate: { type: GraphQLDateTime },
+    addressID: { type: GraphQLString },
+    frequency: { type: GraphQLInt },
+    status: { type: GraphQLString },
+  },
+  resolve(parent, args) {
+    return Subscription.findByIdAndUpdate(
+      args.id,
+      {
+        items: args.items,
+        nextDeliveryDate: args.nextDeliveryDate,
+        endDate: args.endDate,
+        addressID: args.addressID,
+        frequency: args.frequency,
+        status: args.status,
+      },
+      { runValidators: true, omitUndefined: true, new: true }
+    );
+  },
+};
+
 const deleteSubscription = {
   type: SubscriptionType,
   args: { id: { type: new GraphQLNonNull(GraphQLID) } },
@@ -45,4 +74,4 @@ const deleteSubscription = {
   },
 };
 
-module.exports = { addSubscription, deleteSubscription };
+module.exports = { addSubscription, deleteSubscription, editSubscription };

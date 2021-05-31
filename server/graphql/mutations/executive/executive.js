@@ -48,7 +48,7 @@ const editExecutive = {
     phone: { type: GraphQLString },
     password: { type: GraphQLString },
     routeID: { type: GraphQLString },
-    status: { type: GraphQLString },
+    isActive: { type: GraphQLBoolean },
   },
   async resolve(parent, args) {
     const hashedPass = await bcrypt.hash(args.password, 10);
@@ -60,7 +60,7 @@ const editExecutive = {
         phone: args.phone,
         password: hashedPass,
         routeID: args.routeID,
-        status: args.status,
+        isActive: args.isActive,
       },
       { runValidators: true, omitUndefined: true, new: true }
     );

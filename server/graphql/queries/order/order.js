@@ -3,7 +3,10 @@ const { GraphQLList, GraphQLID } = graphql;
 
 const { OrderType } = require("../../types/types");
 const Order = require("../../../models/orders/order");
-const { GraphQLDate } = require("graphql-iso-date");
+const date = require("date-and-time");
+
+const now = new Date();
+const today = date.addHours(now, 9);
 
 const orders = {
   type: new GraphQLList(OrderType),
@@ -12,12 +15,10 @@ const orders = {
   },
 };
 
-const orderForDate = {
-  type: new GraphQLList(OrderType),
-  args: { date: { type: GraphQLDate } },
+const ordersForToday = {
+  type: GraphQLList(OrderType),
   resolve(parent, args) {
-    const date = new Date(args.date);
-    const queryDate = date.toISOString().split("T")[0];
+    const queryDate = today.toISOString().split("T")[0];
     return Order.find({
       deliveryDate: new Date(queryDate),
       status: { $ne: "PENDING" },
@@ -33,4 +34,4 @@ const order = {
   },
 };
 
-module.exports = { orders, order, orderForDate };
+module.exports = { orders, order, ordersForToday };

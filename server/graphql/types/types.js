@@ -121,10 +121,15 @@ const ExecutiveType = new GraphQLObjectType({
       resolve(parent, args) {
         const now = new Date();
         const today = date.addHours(now, 9);
+        const tomorrow = date.addHours(now, 33);
         const todayQueryDate = today.toISOString().split("T")[0];
+        const tomorrowQueryDate = tomorrow.toISOString().split("T")[0];
         return Order.find({
           routeID: parent.routeID,
-          deliveryDate: new Date(todayQueryDate),
+          deliveryDate: {
+            $gte: new Date(todayQueryDate),
+            $lt: new Date(tomorrowQueryDate),
+          },
           status: { $ne: "PENDING" },
         });
       },

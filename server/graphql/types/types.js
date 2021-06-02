@@ -22,8 +22,6 @@ const Address = require("../../models/customer/address");
 const Customer = require("../../models/customer/customer");
 const Order = require("../../models/orders/order");
 
-const now = new Date();
-const today = date.addHours(now, 9);
 // -----------------------------------------------Geolocation Types Starts----------------------------------------------
 const HubType = new GraphQLObjectType({
   name: "Hub",
@@ -121,6 +119,8 @@ const ExecutiveType = new GraphQLObjectType({
     ordersForToday: {
       type: GraphQLList(OrderType),
       resolve(parent, args) {
+        const now = new Date();
+        const today = date.addHours(now, 9);
         const todayQueryDate = today.toISOString().split("T")[0];
         return Order.find({
           routeID: parent.routeID,

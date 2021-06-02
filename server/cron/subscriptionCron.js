@@ -10,12 +10,20 @@ const cronTime =
 const Scheduler = () => {
   cron.schedule(cronTime, async () => {
     const tomorrow = new Date();
+    const dayAfterTomorrow = new Date();
     tomorrow.setDate(new Date().getDate() + 1);
-    const queryDateFormat = tomorrow.toISOString().split("T")[0];
+    dayAfterTomorrow.setDate(new Date().getDate() + 2);
+    const tomorrowQueryDateFormat = tomorrow.toISOString().split("T")[0];
+    const dayAfterTomorrowQueryDateFormat = dayAfterTomorrow
+      .toISOString()
+      .split("T")[0];
     const locationList = await Location.find({});
     try {
       Subscription.find({
-        nextDeliveryDate: new Date(queryDateFormat),
+        nextDeliveryDate: {
+          $gte: new Date(tomorrowQueryDateFormat),
+          $lt: new Date(dayAfterTomorrowQueryDateFormat),
+        },
         status: "ACTIVE",
       }).then((foundSubscriptions) => {
         foundSubscriptions.map(async (singleSub) => {

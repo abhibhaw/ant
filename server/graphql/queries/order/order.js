@@ -1,9 +1,11 @@
 const graphql = require("graphql");
-const { GraphQLList, GraphQLID } = graphql;
+const { GraphQLList, GraphQLID, GraphQLString } = graphql;
 
 const { OrderType } = require("../../types/types");
 const Order = require("../../../models/orders/order");
 const date = require("date-and-time");
+const { GraphQLDate } = require("graphql-iso-date");
+const Executive = require("../../../models/executives/executive");
 
 const orders = {
   type: new GraphQLList(OrderType),
@@ -30,6 +32,29 @@ const ordersForToday = {
   },
 };
 
+const ordersByExecutiveIDAndDate = {
+  type: GraphQLList(OrderType),
+  args: {
+    executiveID: { type: GraphQLString },
+    date: { type: GraphQLDate },
+  },
+  async resolve(parent, args) {
+    const executive = await Executive.findById(args.executiveID);
+    startDate = args.date;
+    const endDate = date.addDays(startDate, 1);
+    const queryStartDate = startDate.toISOString().split("T")[0];
+    const queryEndDate = endDate.toISOString().split("T")[0];
+    return Order.find({
+      routeID: executive.routeID,
+      deliveryDate: {
+        $gte: new Date(queryStartDate),
+        $lt: new Date(queryEndDate),
+      },
+      status: { $ne: "PENDING" },
+    });
+  },
+};
+
 const order = {
   type: OrderType,
   args: { id: { type: GraphQLID } },
@@ -38,4 +63,4 @@ const order = {
   },
 };
 
-module.exports = { orders, order, ordersForToday };
+module.exports = { orders, order, ordersForToday, ordersByExecutiveIDAndDate };

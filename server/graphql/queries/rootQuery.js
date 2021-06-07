@@ -21,6 +21,7 @@ const {
   orders,
   ordersForToday,
   ordersByExecutiveIDAndDate,
+  ordersForDateRange,
 } = require("./order/order");
 const { transactions, transaction } = require("./transaction/transaction");
 
@@ -58,6 +59,7 @@ const RootQuery = new GraphQLObjectType({
     order: order,
     ordersForToday: ordersForToday,
     ordersByExecutiveIDAndDate: ordersByExecutiveIDAndDate,
+    ordersForDateRange: ordersForDateRange,
     // Transaction
     transactions: transactions,
     transaction: transaction,

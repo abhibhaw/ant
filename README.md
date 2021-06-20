@@ -21,7 +21,7 @@ Project developed and owned by [GEPTON](https://gepton.com)
 <br>
 `yarn start`
 <br>
-`Default PORTS: 3000`
+`Default PORTS: 4000`
 
 # Contributing
 

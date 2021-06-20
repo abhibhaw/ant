@@ -32,6 +32,29 @@ const ordersForToday = {
   },
 };
 
+const ordersByCustomerIDAndDate = {
+  type: GraphQLList(OrderType),
+  args: {
+    customerID: { type: GraphQLString },
+    startDate: { type: GraphQLDate },
+    endDate: { type: GraphQLDate },
+  },
+  async resolve(parent, args) {
+    const startDate = args.startDate;
+    const endArgs = args.endDate;
+    const endDate = date.addDays(endArgs, 1);
+    const queryStartDate = startDate.toISOString().split("T")[0];
+    const queryEndDate = endDate.toISOString().split("T")[0];
+    return Order.find({
+      customerID: args.customerID,
+      deliveryDate: {
+        $gte: new Date(queryStartDate),
+        $lt: new Date(queryEndDate),
+      },
+    });
+  },
+};
+
 const ordersByExecutiveIDAndDate = {
   type: GraphQLList(OrderType),
   args: {
@@ -88,6 +111,7 @@ module.exports = {
   orders,
   order,
   ordersForToday,
+  ordersByCustomerIDAndDate,
   ordersByExecutiveIDAndDate,
   ordersForDateRange,
 };

@@ -19,4 +19,12 @@ const subscription = {
   },
 };
 
-module.exports = { subscriptions, subscription };
+const subscriptionsByCustomerID = {
+  type: new GraphQLList(SubscriptionType),
+  args: { customerID: { type: GraphQLNonNull(GraphQLString) } },
+  resolve(parent, args) {
+    return Subscription.find({ customerID: args.customerID });
+  },
+};
+
+module.exports = { subscriptions, subscription, subscriptionsByCustomerID };
